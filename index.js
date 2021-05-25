@@ -6,7 +6,9 @@ const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 
 const generatePage = require('./src/page-template');
-const { writeFile, copyFile } = require('./src/generate-site');
+const writeHTML = require('./src/generate-site');
+
+const team = [];
 
 const promptUser = () => {
    return inquirer.prompt([{
@@ -128,10 +130,11 @@ const promptUser = () => {
         }])
         .then (res => {
             if (res.newEmployee === true) {
-                teamTree(team);
+                promptUser(team);
             } else {
                 let cardsHTML = generatePage(team);
-                writeHTML(cardsHTML);
+                
+            return writeHTML(cardsHTML);
                 
             }
         })
